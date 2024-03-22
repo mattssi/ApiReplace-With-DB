@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ChistesAPI_DB.Models.Estudiante>
+
+@{
+    ViewData["Title"] = "Index";
+    var pageSize = 10;
+    var currentPage = ViewContext.HttpContext.Request.Query["page"].FirstOrDefault();
+    var currentPageNumber = !string.IsNullOrEmpty(currentPage) ? Convert.ToInt32(currentPage) : 1;
+    var pageCount = (int)Math.Ceiling(Model.Count() / (double)pageSize);
+}
+
+<h1>Estudiantes</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaNacimiento)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Skip((currentPageNumber - 1) * pageSize).Take(pageSize))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaNacimiento)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdEstudiante">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdEstudiante">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdEstudiante">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @for (var i = 1; i <= pageCount; i++)
+            {
+                <li class="page-item @(i == currentPageNumber ? "active" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>

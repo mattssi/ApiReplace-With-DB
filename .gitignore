@@ -1,0 +1,29 @@
+# .NET
+bin/
+obj/
+
+# Visual Studio
+*.user
+*.suo
+*.suo
+*.nuget
+*.dotCover
+*.dbmdl
+*.log
+*.jfm
+*.iuser
+*.lock
+*.sdf
+*.opensdf
+[Tt]est[Rr]esult*
+[Bb]in
+[Dd]ebug*/
+[Rr]elease*/
+x64/*
+x86/*
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Ll]og/
+[Ll]ogs/
