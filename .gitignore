@@ -4,6 +4,8 @@ obj/
 
 # Visual Studio
 *.user
+.vs/
+*.sln
 *.suo
 *.suo
 *.nuget
