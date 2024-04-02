@@ -1,52 +1,34 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ChistesAPI_DB.Models;
 
 namespace ChistesAPI_DB.Controllers
 {
-    public class ChistesController : Controller
+    public class VistaChistesController : Controller
     {
         private readonly ApiReplaceContext _context;
 
-        public ChistesController(ApiReplaceContext context)
+        public VistaChistesController(ApiReplaceContext context)
         {
             _context = context;
         }
 
-        // GET: Chistes
+        // GET: /VistaChistes/Index
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Chistes.ToListAsync());
+            var chistes = await _context.Chistes.ToListAsync();
+            return View(chistes);
         }
 
-        // GET: Chistes/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var chiste = await _context.Chistes
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (chiste == null)
-            {
-                return NotFound();
-            }
-
-            return View(chiste);
-        }
-
-        // GET: Chistes/Create
+        // GET: /VistaChistes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Chistes/Create
+        // POST: /VistaChistes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Contenido")] Chiste chiste)
@@ -60,7 +42,7 @@ namespace ChistesAPI_DB.Controllers
             return View(chiste);
         }
 
-        // GET: Chistes/Edit/5
+        // GET: /VistaChistes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,7 +58,7 @@ namespace ChistesAPI_DB.Controllers
             return View(chiste);
         }
 
-        // POST: Chistes/Edit/5
+        // POST: /VistaChistes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Contenido")] Chiste chiste)
@@ -109,7 +91,7 @@ namespace ChistesAPI_DB.Controllers
             return View(chiste);
         }
 
-        // GET: Chistes/Delete/5
+        // GET: /VistaChistes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -127,7 +109,7 @@ namespace ChistesAPI_DB.Controllers
             return View(chiste);
         }
 
-        // POST: Chistes/Delete/5
+        // POST: /VistaChistes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -143,7 +125,6 @@ namespace ChistesAPI_DB.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
 
         private bool ChisteExists(int id)
         {

@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:latest
+    container_name: sql-server
+    environment:
+      SA_PASSWORD: 
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433" # Puerto para acceder a SQL Server desde fuera del contenedor
+    volumes:
+      - ./data:/var/opt/mssql # Opcional: mapeo de volumen para persistir los datos de la base de datos en el host

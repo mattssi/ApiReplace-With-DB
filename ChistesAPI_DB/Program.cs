@@ -1,4 +1,6 @@
 using ChistesAPI_DB.Models;
+using Microsoft.AspNetCore.Http;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -39,6 +41,9 @@ builder.Services.AddAuthentication(config =>
 
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpContextAccessor();
+
 
 builder.Services.AddDbContext<ApiReplaceContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("conexion")));
